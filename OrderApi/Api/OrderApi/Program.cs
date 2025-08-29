@@ -1,0 +1,26 @@
+namespace OrderApi
+{
+	public class Program
+	{
+		public static void Main(string[] args)
+		{
+			CreateWebHostBuilder(args).Build().Run();
+		}
+
+		public static IHostBuilder CreateWebHostBuilder(string[] args)
+		{
+			return Host.CreateDefaultBuilder(args)
+				.ConfigureAppConfiguration((hostingcontext, config) =>
+				{
+					config.AddJsonFile("appsettings.json", false, true)
+						.AddJsonFile($"appsettings.{hostingcontext.HostingEnvironment.EnvironmentName}.json", true, true);
+				})
+				.ConfigureWebHostDefaults(webBuilder =>
+				{
+					webBuilder.UseStartup<Startup>();
+				})
+				.UseDefaultServiceProvider(options =>
+					options.ValidateScopes = false); // needed for mediatr DI
+		}
+	}
+}
