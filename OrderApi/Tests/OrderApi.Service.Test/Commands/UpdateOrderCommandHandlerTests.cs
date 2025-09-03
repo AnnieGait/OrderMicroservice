@@ -1,4 +1,5 @@
 ﻿using FakeItEasy;
+using Microsoft.Extensions.Logging;
 using OrderApi.Data.Repository;
 using OrderApi.Domain;
 using OrderApi.Service.Commands;
@@ -9,11 +10,14 @@ namespace OrderApi.Service.Test.Commands
 	{
 		private readonly UpdateOrderCommandHandler _testee;
 		private readonly IRepository<Order> _repository;
+		private readonly ILogger<UpdateOrderCommandHandler> _logger;
 
 		public UpdateOrderCommandHandlerTests()
 		{
 			_repository = A.Fake<IRepository<Order>>();
-			_testee = new UpdateOrderCommandHandler(_repository);
+			_logger = A.Fake<ILogger<UpdateOrderCommandHandler>>();
+
+			_testee = new UpdateOrderCommandHandler(_repository, _logger);
 		}
 
 		[Fact]

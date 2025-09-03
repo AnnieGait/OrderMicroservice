@@ -4,6 +4,7 @@ using CustomerApi.Messaging.Send.Sender;
 using CustomerApi.Service.Commands;
 using FakeItEasy;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 
 namespace CustomerApi.Service.Test.Commands
 {
@@ -13,12 +14,14 @@ namespace CustomerApi.Service.Test.Commands
 		private readonly ICustomerRepository<Customer> _repository;
 		private readonly ICustomerUpdateSender _customerUpdateSender;
 		private readonly Customer _customer;
+		private readonly ILogger<UpdateCustomerCommandHandler> _logger;
 
 		public UpdateCustomerCommandHandlerTests()
 		{
 			_repository = A.Fake<ICustomerRepository<Customer>>();
 			_customerUpdateSender = A.Fake<ICustomerUpdateSender>();
-			_testee = new UpdateCustomerCommandHandler(_repository, _customerUpdateSender);
+			_logger = A.Fake<ILogger<UpdateCustomerCommandHandler>>();
+			_testee = new UpdateCustomerCommandHandler(_repository, _customerUpdateSender, _logger);
 
 			_customer = new Customer
 			{

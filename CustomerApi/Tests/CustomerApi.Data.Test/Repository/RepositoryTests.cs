@@ -80,7 +80,7 @@ namespace CustomerApi.Data.Test.Repository
 		{
 			A.CallTo(() => _CustomerContext.Set<Customer>()).Throws<Exception>();
 
-			_testeeFake.Invoking(x => x.GetAll()).Should().Throw<Exception>().WithMessage("Couldn't retrieve entities");
+			_testeeFake.Invoking(x => x.GetAll()).Should().Throw<Exception>();
 		}
 
 		[Fact]

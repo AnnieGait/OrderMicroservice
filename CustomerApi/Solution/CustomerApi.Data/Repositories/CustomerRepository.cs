@@ -13,31 +13,17 @@ namespace CustomerApi.Data.Repositories
 
 		public IQueryable<TEntity> GetAll()
 		{
-			try
-			{
-				return _customerContext.Set<TEntity>();
-			}
-			catch (Exception)
-			{
-				throw new Exception("Couldn't retrieve entities");
-			}
+			return _customerContext.Set<TEntity>();
 		}
 
 		public async Task<TEntity> AddAsync(TEntity entity)
 		{
 			ArgumentNullException.ThrowIfNull(entity);
 
-			try
-			{
-				await _customerContext.AddAsync(entity);
-				await _customerContext.SaveChangesAsync();
+			await _customerContext.AddAsync(entity);
+			await _customerContext.SaveChangesAsync();
 
-				return entity;
-			}
-			catch (Exception)
-			{
-				throw new Exception($"{nameof(entity)} could not be saved");
-			}
+			return entity;
 		}
 
 		public async Task<TEntity> UpdateAsync(TEntity entity)

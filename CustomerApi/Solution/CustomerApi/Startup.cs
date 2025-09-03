@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NLog.Extensions.Logging;
 
 namespace CustomerApi
 {
@@ -27,6 +28,7 @@ namespace CustomerApi
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			AddLogging(services);
 			services.AddControllers();
 			services.AddOptions();
 
@@ -105,6 +107,15 @@ namespace CustomerApi
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+			});
+		}
+
+		private void AddLogging(IServiceCollection services)
+		{
+			services.AddLogging(_loggingBuilder =>
+			{
+				_loggingBuilder.ClearProviders();
+				_loggingBuilder.AddNLog();
 			});
 		}
 	}

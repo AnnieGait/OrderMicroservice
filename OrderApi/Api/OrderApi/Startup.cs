@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using NLog.Extensions.Logging;
 using OrderApi.Data.Database;
 using OrderApi.Data.Repository;
 using OrderApi.Domain;
@@ -14,7 +15,6 @@ using OrderApi.Service.Commands;
 using OrderApi.Service.Queries;
 using OrderApi.Service.Services;
 using OrderApi.Validators;
-using System.Reflection;
 
 namespace OrderApi
 {
@@ -29,6 +29,8 @@ namespace OrderApi
 
 		public void ConfigureServices(IServiceCollection services)
 		{
+			AddLogging(services);
+
 			services.AddControllers();
 			services.AddOptions();
 
@@ -69,7 +71,7 @@ namespace OrderApi
 				};
 			});
 
-			services.AddMediatR(Assembly.GetExecutingAssembly(), typeof(ICustomerNameUpdateService).Assembly);
+			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Startup>());
 
 			services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
@@ -107,6 +109,15 @@ namespace OrderApi
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapControllers();
+			});
+		}
+
+		private void AddLogging(IServiceCollection services)
+		{
+			services.AddLogging(_loggingBuilder =>
+			{
+				_loggingBuilder.ClearProviders();
+				_loggingBuilder.AddNLog();
 			});
 		}
 	}
