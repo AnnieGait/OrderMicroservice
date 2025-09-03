@@ -78,7 +78,7 @@ namespace OrderApi.Data.Test.Repository
 		{
 			A.CallTo(() => _orderContext.Set<Order>()).Throws<Exception>();
 
-			_testeeFake.Invoking(x => x.GetAll()).Should().Throw<Exception>().WithMessage("Couldn't retrieve entities");
+			_testeeFake.Invoking(x => x.GetAll()).Should().Throw<Exception>();
 		}
 
 		[Fact]

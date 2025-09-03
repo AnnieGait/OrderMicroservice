@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.Extensions.Logging;
 using OrderApi.Service.Commands;
 using OrderApi.Service.Models;
 using OrderApi.Service.Queries;
@@ -8,10 +9,14 @@ namespace OrderApi.Service.Services
 	public class CustomerNameUpdateService : ICustomerNameUpdateService
 	{
 		private readonly IMediator _mediator;
+		private readonly ILogger<CustomerNameUpdateService> _logger;
 
-		public CustomerNameUpdateService(IMediator mediator)
+		public CustomerNameUpdateService(
+			IMediator mediator,
+			ILogger<CustomerNameUpdateService> logger)
 		{
 			_mediator = mediator;
+			_logger = logger;
 		}
 
 		public async Task UpdateCustomerNameInOrders(UpdateCustomerFullNameModel updateCustomerFullNameModel)
@@ -35,7 +40,7 @@ namespace OrderApi.Service.Services
 			}
 			catch (Exception ex)
 			{
-				// TODO : Add nlog. log exception (e.g., using a logging framework)
+				_logger.LogError(ex, "Couldn't update customer full name in orders");
 				throw;
 			}
 		}

@@ -3,6 +3,7 @@ using CustomerApi.Domain.Entities;
 using CustomerApi.Service.Commands;
 using FakeItEasy;
 using FluentAssertions;
+using Microsoft.Extensions.Logging;
 
 namespace CustomerApi.Service.Test.Commands
 {
@@ -10,11 +11,13 @@ namespace CustomerApi.Service.Test.Commands
 	{
 		private readonly CreateCustomerCommandHandler _testee;
 		private readonly ICustomerRepository<Customer> _repository;
+		private readonly ILogger<CreateCustomerCommandHandler> _logger;
 
 		public CreateCustomerCommandHandlerTests()
 		{
 			_repository = A.Fake<ICustomerRepository<Customer>>();
-			_testee = new CreateCustomerCommandHandler(_repository);
+			_logger = A.Fake<ILogger<CreateCustomerCommandHandler>>();
+			_testee = new CreateCustomerCommandHandler(_repository, _logger);
 		}
 
 		[Fact]
