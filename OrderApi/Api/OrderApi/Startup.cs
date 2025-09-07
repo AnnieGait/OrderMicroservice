@@ -15,6 +15,7 @@ using OrderApi.Service.Commands;
 using OrderApi.Service.Queries;
 using OrderApi.Service.Services;
 using OrderApi.Validators;
+using System.Reflection;
 
 namespace OrderApi
 {
@@ -71,7 +72,12 @@ namespace OrderApi
 				};
 			});
 
-			services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<Startup>());
+			services.AddMediatR(cfg =>
+			{
+				cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
+				cfg.RegisterServicesFromAssembly(typeof(ICustomerNameUpdateService).Assembly);
+				//cfg.RegisterServicesFromAssembly(typeof(GetOrderByCustomerGuidQueryHandler).Assembly); // Add if in a different assembly
+			});
 
 			services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
