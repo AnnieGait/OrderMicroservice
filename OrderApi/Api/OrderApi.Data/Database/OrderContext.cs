@@ -17,16 +17,16 @@ namespace OrderApi.Data.Database
 			{
 				new Order
 				{
-					Id = Guid.Parse("9f35b48d-cb87-4783-bfdb-21e36012930a"),
+					Id = Guid.Parse("d3e3137e-ccc9-488c-9e89-50ba354738c2"),
 					OrderState = OrderState.Accepted,
-					CustomerGuid = Guid.Parse("d3e3137e-ccc9-488c-9e89-50ba354738c2"),
+					CustomerGuid = Guid.Parse("9f35b48d-cb87-4783-bfdb-21e36012930a"),
 					CustomerFullName = "Wolfgang Ofner"
 				},
 				new Order
 				{
 					Id = Guid.Parse("bffcf83a-0224-4a7c-a278-5aae00a02c1e"),
 					OrderState = OrderState.Accepted,
-					CustomerGuid = Guid.Parse("4a2f1e35-f527-4136-8b12-138a57e1ba08"),
+					CustomerGuid = Guid.Parse("654b7573-9501-436a-ad36-94c5696ac28f"),
 					CustomerFullName = "Darth Vader"
 				},
 				new Order

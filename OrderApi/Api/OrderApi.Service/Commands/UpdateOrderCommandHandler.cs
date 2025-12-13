@@ -22,7 +22,6 @@ namespace OrderApi.Service.Commands
 		{
 			try
 			{
-
 				await _repository.UpdateRangeAsync(request.Orders);
 			}
 			catch (Exception ex)
