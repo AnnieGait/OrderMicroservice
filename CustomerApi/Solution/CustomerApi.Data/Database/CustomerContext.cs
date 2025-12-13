@@ -32,7 +32,7 @@ namespace CustomerApi.Data.Database
 				},
 				new Customer
 				{
-					Id = Guid.Parse("971316e1-4966-4426-b1ea-a36c9dde1066"),
+					Id = Guid.Parse("334feb16-d7bb-4ca9-ab56-f4fadeb88d21"),
 					FirstName = "Son",
 					LastName = "Goku",
 					Birthday = new DateTime(737, 04, 16),
