@@ -76,7 +76,6 @@ namespace OrderApi
 			{
 				cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly());
 				cfg.RegisterServicesFromAssembly(typeof(ICustomerNameUpdateService).Assembly);
-				//cfg.RegisterServicesFromAssembly(typeof(GetOrderByCustomerGuidQueryHandler).Assembly); // Add if in a different assembly
 			});
 
 			services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
