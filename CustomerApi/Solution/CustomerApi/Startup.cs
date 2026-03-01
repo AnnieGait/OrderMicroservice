@@ -32,7 +32,7 @@ namespace CustomerApi
 			services.AddControllers();
 			services.AddOptions();
 
-			services.Configure<RabbitMqConfiguration>(Configuration.GetSection("RabbitMq"));
+			services.Configure<RabbitMqConfiguration>(Configuration.GetSection(nameof(RabbitMqConfiguration)));
 
 			services.AddDbContext<CustomerContext>(options =>
 			{
